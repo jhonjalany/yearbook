@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: #c28f5244;
+    }
+
+    .body-div {
+      display: block;
+    }
+    /*--------------header--------------*/
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo {
+      height: 60px;
+    }
+    .schoolName {
+      font-size: 15px;
+      text-align: center;
+      font-weight: 600;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    /*----------------Students---------------------*/
+    .sectionName {
+      text-align: center;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+    .display-highHonor {
+      display: block;
+    }
+    .render {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .studentDiv {
+      margin-top: 5px;
+      width: 30%;
+    }
+    .studentPicture {
+      height: 65px;
+      align-content: center;
+      cursor: pointer;
+    }
+    .studentName {
+      font-size: 11px;
+      text-align: center;
+      margin: 0px;
+    }
+
+    /*--------------------sections---------*/
+
+    .display-section {
+      display: block;
+    }
+
+    /*-------------next & preveus button--------*/
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 11px;
+    }
+    
+    .print,
+    .next,
+    .previous {
+      display: block;
+      font-size: 15px;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    .print {
+      margin-right: 10px;
+    }
+    .next_n_print_button {
+      display: flex;
+    }
+
+    /*-------------expand image--------*/
+
+    .expand {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+    }
+
+    .x-button {
+      font-size: 30px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    .expand-image {
+      height: 300px;
+    }
+
+
+  @media (min-width: 750px) {
+
+    /*--------------header--------------*/
+    .header {
+      margin-bottom: 30px;
+    }
+    .logo {
+      height: 90px;
+    }
+    .schoolName {
+      font-size: 25px;
+      font-weight: bold;
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    /*----------------Students---------------------*/
+    .sectionName {
+      font-size: 35px;
+      margin-bottom: 5px;
+    }
+    .studentDiv {
+      margin-top: 30px;
+      width: 25%;
+    }
+    .studentPicture {
+      height: 150px;
+    }
+    .studentName {
+      font-size: 20px;
+    }
+
+    /*-------------next & preveus button--------*/
+    .buttons {
+      margin-top: 20px;
+    }
+    .print,
+    .next,
+    .previous {
+      font-size: 20px;
+    }
+
+    /*-------------expand image--------*/
+    .x-button {
+      font-size: 40px;
+    }
+    .expand-image {
+      height: 500px;
+    }
+
+  }
+
+  @media print {
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+    .header {
+      margin-bottom: 0px;
+    }
+    .logo {
+      height: 100px;
+    }
+    .schoolName {
+      font-size: 25px;
+      font-weight: bold;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    /*----------------Students---------------------*/
+    .studentDiv {
+      width: 25%;
+      margin-bottom: 20px;
+    }
+    .studentPicture {
+      height: 130px;
+    }
+    .studentName {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /*-------------next & preveus button--------*/
+    
+    /*optional*/
+    .next,
+    .next_n_print_button,
+    .print,
+    .previous,
+    .buttons {
+      display: none;
+     
+      
+    }
+    .page-break {
+      page-break-before: always;
+    }
+  }
+
+  </style>
+
+
+</head>
+<body>
+  
+  
+  <div class="expand"></div>
+  <div class="body-div">
+    <div class="header"></div>
+    <div class="display-highHonor" ></div>
+    <div class="display-honor page-break"></div>
+  </div>
+  <div class="display-section"></div>
+  <div class="buttons">
+    <button class="previous" onclick="
+      p = p - 1
+      if (p == 0) {
+        firstPage(p)
+        
+      }else {
+        pages(p)
+      }
+      pageButton(p)
+    ">PREVIOUS</button>
+    <div class="next_n_print_button">
+      <button class="print" onclick=" 
+        remove()
+        window.print()
+        adds()">Print</button>
+      <button class="next" onclick="
+        p = p + 1;
+        pages(p);
+        pageButton(p);
+      ">NEXT</button>
+    </div>
+    
+  </div>
+  
+
+  <script>
+        
+
+    const highHonor = {
+      1 : { 
+        name : "johnmark bacalso",
+        picture : "rock.png"
+      },
+      2 : {
+        name : "sunny boy Dumanhog",
+        picture : "https://i.postimg.cc/Vvh6fTW7/paper.png"
+      },
+      3 : {
+        name : "hubert dean Cabalquinto",
+        picture : "https://i.postimg.cc/Vvh6fTW7/paper.png"
+      },
+      4 : {
+        name : "blankname dsgdydsgffy",
+        picture : "rock.png"
+      },
+      5 : {
+        name : "blankname eytertdsy",
+        picture : "rock.png"
+      },
+      6 : { 
+        name : "johnmark bacalso",
+        picture : "rock.png"
+      },
+      7 : {
+        name : "sunny boy Dumanhog",
+        picture : "https://i.postimg.cc/Vvh6fTW7/paper.png"
+      },
+      8 : {
+        name : "hubert dean Cabalquinto",
+        picture : "paper.png"
+      },
+      9 : {
+        name : "blankname dsgdydsgffy",
+        picture : "rock.png"
+      },
+      10 : {
+        name : "blankname eytertdsy",
+        picture : "rock.png"
+      },
+      11 : { 
+        name : "johnmark bacalso",
+        picture : "rock.png"
+      },
+      12 : {
+        name : "sunny boy Dumanhog",
+        picture : "paper.png"
+      },
+      13 : {
+        name : "hubert dean Cabalquinto",
+        picture : "paper.png"
+      },
+      14 : {
+        name : "blankname dsgdydsgffy",
+        picture : "rock.png"
+      },
+      15 : {
+        name : "blankname eytertdsy",
+        picture : "rock.png"
+      },
+      16 : { 
+        name : "johnmark bacalso",
+        picture : "rock.png"
+      },
+      17 : {
+        name : "sunny boy Dumanhog",
+        picture : "paper.png"
+      },
+      18 : {
+        name : "hubert dean Cabalquinto",
+        picture : "paper.png"
+      },
+      19 : {
+        name : "blankname dsgdydsgffy",
+        picture : "rock.png"
+      },
+      20 : {
+        name : "blankname eytertdsy",
+        picture : "rock.png"
+      }
+    }
+
+    const honor = {
+      1 : { 
+        name : "blankname balagtas",
+        picture : "rock.png"
+      },
+      2 : {
+        name : "blankname bacxfgfjkhg",
+        picture : "paper.png"
+      },
+      3 : {
+        name : "blankname dfdgfyhgfghggfu",
+        picture : "paper.png"
+      },
+      4 : {
+        name : "blankname dsgdydsgffy",
+        picture : "rock.png"
+      },
+      5 : {
+        name : "blankname eytertdsy",
+        picture : "rock.png"
+      }
+    }
+
+    const bagsik = {
+      1 : { 
+        name : "blankname balagtas",
+        picture : "rock.png"
+      },
+      2 : {
+        name : "blankname bacxfgfjkhg",
+        picture : "paper.png"
+      },
+      3 : {
+        name : "blankname remandaban ",
+        picture : "paper.png"
+      },
+      4 : {
+        name : "blankname dsgdydsgffy",
+        picture : "rock.png"
+      },
+      5 : {
+        name : "blankname eytertdsy",
+        picture : "rock.png"
+      }
+    }
+    
+    const kalasag = {
+      1 : { 
+        name : "blankname balagtas",
+        picture : "rock.png"
+      },
+      2 : {
+        name : "blankname bacxfgfjkhg",
+        picture : "paper.png"
+      },
+      3 : {
+        name : "blankname dfdgfyhgfghggfu",
+        picture : "paper.png"
+      },
+      4 : {
+        name : "blankname dsgdydsgffy",
+        picture : "rock.png"
+      },
+      5 : {
+        name : "blankname eytertdsy",
+        picture : "rock.png"
+      }
+    }
+
+
+    const kamandag = {
+      1 : { 
+        name : "friday balagtas",
+        picture : "rock.png"
+      },
+      2 : {
+        name : "thursday bacxfgfjkhg",
+        picture : "paper.png"
+      },
+      3 : {
+        name : "wednesday dfdgfyhgfghggfu",
+        picture : "paper.png"
+      },
+      4 : {
+        name : "tuesday dsgdydsgffy",
+        picture : "rock.png"
+      },
+      5 : {
+        name : "monday djdshfkjshfkj",
+        picture : "rock.png"
+      }
+    }
+//--------------------------customize  logo and name of School-------------------------------
+    const heads = ["rock.png","Abuyog National High School Abuyog, Leyte","paper.png"]
+//-----------------------------------customize section list object----------------------------
+    const pagelist = [[highHonor,honor],bagsik,kalasag,kamandag]
+//----------------------------customize name of section --------------------------
+    const section_list = [["High Honors","Honors"],"Bagsik","kalasag","kamandag"]
+
+    let p = 0;
+
+    const element_expand = document.querySelector(".expand");
+    const element_body_div = document.querySelector(".body-div");
+    const element_buttons = document.querySelector(".buttons");
+    const element_display_section = document.querySelector(".display-section")
+
+    
+
+    firstPage(p)
+    pageButton(p)
+
+//----------------------------render all sections--------------------------------
+    function pages(p) {
+      element_body_div.style.display = "none"
+      element_display_section.style.display = "block"
+      
+      let section = ``;
+      let i = 1
+      while (pagelist[p][i] != undefined) {
+        section += `<div class="studentDiv">
+          <img class="studentPicture" src="${pagelist[p][i].picture}" alt="" onclick="
+          pages_expand('${pagelist[p][i].picture}')
+          ">
+          <p class="studentName">${pagelist[p][i].name}</p>
+        </div>`;
+        i++
+      }
+      element_display_section.innerHTML = `<p class="sectionName">${section_list[p]}</p><div class="render">${section}</div>`
+    }
+
+    function pages_expand(image) {
+      element_display_section.style.display = "none"
+      element_buttons.style.display = "none"
+      element_expand.style.display = "flex"
+      element_expand.innerHTML = `
+        <button class="x-button" onclick="pages_close()">x</button>
+        <img src="${image}" alt="" class="expand-image">
+      `;
+    }
+
+    function pages_close() {
+      element_expand.style.display = "none"
+      element_buttons.style.display = "flex"
+      element_display_section.style.display = "block"
+    }
+
+
+
+//--------------------------------------------first page------------------------------
+    function firstPage(p) {
+      element_display_section.style.display = "none"
+      element_body_div.style.display = "block"
+      const element_header = document.querySelector(".header");
+      const element_highHonor = document.querySelector(".display-highHonor");
+      const element_honor = document.querySelector(".display-honor");
+      
+      let header = "";
+      let highHonor = "";
+      let honor = "";
+
+//------------------header---------------------
+      header = `
+        <img class="logo" src="${heads[0]}" alt="">
+        <p class="schoolName">${heads[1]}</p>
+        <img class="logo" src="${heads[2]}" alt="">
+      `;
+
+      element_header.innerHTML = header;
+//---------------------high honor -------------------
+      let i = 1;
+      while (pagelist[p][0][i] != undefined) {
+        highHonor += `<div class="studentDiv">
+          <img class="studentPicture" src="${pagelist[p][0][i].picture}" alt="" onclick="firstpage_expand('${pagelist[p][0][i].picture}')">
+          <p class="studentName">${pagelist[p][0][i].name}</p>
+        </div>`;
+        i++
+      }
+      element_highHonor.innerHTML = `<p class="sectionName">${section_list[p][0]}</p><div class="render">${highHonor}</div>`;
+      i = 1;
+//---------------------honor-----------------------
+      while (pagelist[p][1][i] != undefined) {
+        honor += `<div class="studentDiv">
+          <img class="studentPicture" src="${pagelist[p][1][i].picture}" alt="" onclick="firstpage_expand('${pagelist[p][1][i].picture}')" >
+          <p class="studentName">${pagelist[p][1][i].name}</p>
+        </div>`;
+        i++
+      }
+      element_honor.innerHTML = `<p class="sectionName">${section_list[p][1]}</p><div class="render">${honor}</div>`;
+      i = 1;
+    }
+
+    function firstpage_expand(image) {
+      element_body_div.style.display = "none"
+      element_expand.style.display = "flex"
+      element_buttons.style.display = "none"
+      element_expand.innerHTML = `
+      <button class="x-button" onclick="firstpage_close()">x</button>
+      <img src="${image}" alt="" class="expand-image">
+     `;
+    }
+
+    function firstpage_close() {
+      element_expand.style.display = "none"
+      element_body_div.style.display = "block"
+      element_buttons.style.display = "flex"
+    }
+
+
+
+
+
+
+    function pageButton(p) {
+      const element_buttons = document.querySelector('.buttons');
+      const element_previous = document.querySelector('.previous');
+      const element_next = document.querySelector('.next');
+     
+      
+      if (p <= 0) {
+        element_previous.style.display = "none"
+        element_next.style.display = "block"
+        element_buttons.style.justifyContent = "flex-end";
+      }else if (p == pagelist.length - 1) {
+        element_next.style.display = "none"
+        element_previous.style.display = "block"
+        element_buttons.style.justifyContent = "space-between"
+
+      }else if (p > 0 && p <= pagelist.length - 1) {
+        element_previous.style.display = "block"
+        element_next.style.display = "block"
+        element_buttons.style.justifyContent = "space-between"
+      }
+      
+    }
+
+    function remove() {
+      const element_buttons = document.querySelector(".buttons");
+      element_buttons.style.display = "none"
+    }
+
+    function adds() {
+      const element_buttons = document.querySelector(".buttons");
+      element_buttons.style.display = "flex"
+    }
+
+    
+
+    
+  </script>
+</body>
+</html>
